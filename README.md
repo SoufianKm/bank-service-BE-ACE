@@ -1,4 +1,5 @@
-![image](https://github.com/abbouformations/bank-service-multi-connecteur-jwt/assets/135717843/ed8d6edd-cc11-4d95-b99b-469f0089b076)
+![image](https://github.com/abbouformations/bank-service-multi-connecteur-jwt/assets/135717843/ac54c69d-2c35-45cb-a106-4718ea7988de)
+
 
 US n°1: [username=adminguichet1, password=adminguichet1, URL=http://localhost:8080/auth/signin, METHOD=POST]
 
