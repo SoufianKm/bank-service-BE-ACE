@@ -31,7 +31,9 @@ public class BankAccountServiceImpl implements IBankAccountService {
     @Override
     public AddBankAccountResponse saveBankAccount(AddBankAccountRequest dto) {
        // BankAccount bankAccount = modelMapper.map(dto, BankAccount.class);
-        BankAccount bankAccount = convertDto(dto);
+        BankAccount bankAccount = BankAccount.builder().
+                rib(dto.getRib()).amount(dto.getAmount()).customer(Customer.builder().identityRef(dto.getCustomerIdentityRef()).build()).
+                build();
         Customer customerP = customerRepository.findByIdentityRef(bankAccount.getCustomer().getIdentityRef()).orElseThrow(
                 () -> new BusinessException(String.format("No customer with the identity: %s exist", dto.getCustomerIdentityRef())));
         bankAccount.setAccountStatus(AccountStatus.OPENED);
@@ -40,12 +42,6 @@ public class BankAccountServiceImpl implements IBankAccountService {
         AddBankAccountResponse response = modelMapper.map(bankAccountRepository.save(bankAccount), AddBankAccountResponse.class);
         response.setMessage(String.format("RIB number [%s] for the customer [%s] has been successfully created", dto.getRib(), dto.getCustomerIdentityRef()));
         return response;
-    }
-
-    private BankAccount convertDto(AddBankAccountRequest dto) {
-        return BankAccount.builder().
-                rib(dto.getRib()).amount(dto.getAmount()).customer(Customer.builder().identityRef(dto.getCustomerIdentityRef()).build()).
-                build();
     }
 
     @Override

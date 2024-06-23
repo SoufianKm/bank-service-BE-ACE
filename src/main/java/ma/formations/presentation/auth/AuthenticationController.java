@@ -47,7 +47,6 @@ public class AuthenticationController {
         }
     }
 
-
     @PostMapping("/signup")
     public ResponseEntity<String> createUser(@RequestBody CreateUserRequest createUserRequest) {
         userService.save(UserVo.builder().

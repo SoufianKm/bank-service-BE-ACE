@@ -49,8 +49,8 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
         User user = modelMapper.map(userVo, User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setAuthorities(user.getAuthorities().stream().map(bo ->
-                        roleRepository.findByAuthority(bo.getAuthority()).get()).
-                collect(Collectors.toList()));
+                        roleRepository.findByAuthority(bo.getAuthority()).get()).toList());
+
         userRepository.save(user);
     }
 
@@ -58,8 +58,7 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
     public void save(RoleVo roleVo) {
         Role role = modelMapper.map(roleVo, Role.class);
         role.setAuthorities(role.getAuthorities().stream().map(bo ->
-                        permissionRepository.findByAuthority(bo.getAuthority()).get()).
-                collect(Collectors.toList()));
+                        permissionRepository.findByAuthority(bo.getAuthority()).get()).toList());
         roleRepository.save(role);
     }
 
