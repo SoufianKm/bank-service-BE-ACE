@@ -43,7 +43,7 @@ public class AuthenticationController {
                             collect(Collectors.toList())).build();
             return ResponseEntity.ok(tokenVo);
         } catch (Exception e) {
-            throw new BusinessException("Login ou mot de passe incorrect");
+            throw new BusinessException("Login ou mot de passe erronés");
         }
     }
 
